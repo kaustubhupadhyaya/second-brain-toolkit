@@ -15,12 +15,13 @@ live in the `second-brain` skill (`agent-config/skills/second-brain/scripts/brai
 | `SecondBrain-Gemini-HourlySync` | hourly | `tools/sync_live_gemini.py` (facecard venv): live Gemini chats to `E:\SecondBrain\chats\gemini`, then mirrored into the vault `30_Resources/ai-chats`; exit 1 on failure, alert note in `00_Inbox` after 3 failed hours |
 | `SecondBrain-Harvester` | 23:00 | `tools/second_brain_harvester.mjs`: local agent session logs to `20_Areas/daily-logs`, health and career rollups, review items in `00_Inbox/entities` |
 | `SecondBrain-PlansBackup` | 20:45 | `brain.py backup-plans`: `~/.claude/plans` into the vault `10_Projects/agent-plans` |
+| `SecondBrain-ChangeLog` | 23:50 | `tools/vault_changelog.py`: compares the vault with its last snapshot (`C:\SecondBrainStaging\_changelog`), adds one line per real change to `99_System/vault-change-history.md`, keeps the previous text of edited or deleted notes in `_changelog\versions\<date>`; log `C:\SecondBrainStaging\_logs\vault_changelog.log` |
 
 The Gemini sync stages on `E:\SecondBrain` when E: is attached and on `C:\SecondBrainStaging\SecondBrain` otherwise; its
 log and failure counter are always `C:\SecondBrainStaging\_logs` (an unplugged E: once made it crash silently, 2026-10-21).
 The alert note needs the vault (G:) mounted; Google Drive for Desktop must be running for that.
 
-All three run through `C:\Users\Admin\bin\runhidden\runhidden.exe` (no console window; exit codes reach Task Scheduler).
+All four run through `C:\Users\Admin\bin\runhidden\runhidden.exe` (no console window; exit codes reach Task Scheduler).
 Personal data never goes in this repo: logs, harvester state (`.harvest_*`) and vault content are outside it or ignored.
 
 ## What is NOT in here (deliberate)
